@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-7FN7LEVWXD");
+    </script>
+    <title>Drift Hunters | Seraph</title>
+    <script src="../../storage/js/cloak.js"></script>
+    <link rel="shortcut icon" href="../../images/ico.ico" type="image/x-icon" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+      }
+
+      /* Splash screen styles */
+      .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        z-index: 1000;
+      }
+
+      .splash-screen h1 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #000;
+      }
+
+      /* Unity content */
+      .webgl-content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: none;
+      }
+
+      #gameContainer {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+      <div>
+        <h1>Drift Hunters Pre-Load</h1>
+        <p>Brought to you by Gunner Castle.</p>
+        <p>P.S. Full Seraph is coming soon.</p>
+      </div>
+    </div>
+
+    <!-- Unity Content -->
+    <div class="webgl-content" id="webglContent">
+      <div id="gameContainer"></div>
+    </div>
+
+    <script src="UnityLoader2019.js"></script>
+    <script>
+      var gameInstance;
+
+      // Function to instantiate Unity and show progress
+      function loadGame() {
+        gameInstance = UnityLoader.instantiate("gameContainer", "dh.json");
+
+        // Updating the progress based on UnityLoader progress
+        gameInstance.Module['progress'] = function (progress) {
+          // Here you can also update a progress bar if you'd like, but we're not using it in this case.
+        };
+
+        gameInstance.Module['onRuntimeInitialized'] = function () {
+          // Hide splash screen and show game content once the game is loaded
+          document.getElementById("splashScreen").style.display = "none";
+          document.getElementById("webglContent").style.display = "block";
+        };
+      }
+
+      // Load the game after the page is fully loaded
+      window.onload = function () {
+        loadGame();
+      };
+    </script>
+  </body>
+</html>
